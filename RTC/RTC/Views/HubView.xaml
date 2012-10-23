@@ -6,6 +6,36 @@
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="asfasf" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Background="{StaticResource RTCLilaBrush}">
+            <Grid.RowDefinitions>
+                <!-- Logo -->
+                <RowDefinition Height="60" />
+                <!-- List with opinions -->
+                <RowDefinition Height="60" />
+                <!-- Content Controls -->
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="Headline" Style="{StaticResource HeaderTextStyle}" Foreground="White" Margin="20, 10, 0, 0" />
+
+            <ListView x:Name="Items" Grid.Row="1" Style="{StaticResource PivotListView}" Margin="20, 0, 0, 0"/>
+
+            <ContentControl x:Name="ActiveItem" Grid.Row="2" Margin="20, 10, 0, 0">
+                <ContentControl.ContentTransitions>
+                    <TransitionCollection>
+                        <ContentThemeTransition />
+                    </TransitionCollection>
+                </ContentControl.ContentTransitions>
+            </ContentControl>
+        </Grid>
+        
+        <Grid Grid.Column="1" Width="1000" >
+            <TextBlock Text="Hallo" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" Foreground="Black"/>
+        </Grid>
     </Grid>
 </Page>

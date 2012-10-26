@@ -7,11 +7,17 @@
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500" />
+            <ColumnDefinition Width="400" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Background="{StaticResource RTCLilaBrush}">
+        <Grid Grid.Column="0">
+        	<Grid.Background>
+        		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        			<GradientStop Color="#FF61003F"/>
+        			<GradientStop Color="{StaticResource RTCLila}" Offset="1"/>
+        		</LinearGradientBrush>
+        	</Grid.Background>
             <Grid.RowDefinitions>
                 <!-- Logo -->
                 <RowDefinition Height="60" />
@@ -21,7 +27,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock x:Name="Headline" Style="{StaticResource HeaderTextStyle}" Foreground="White" Margin="20, 10, 0, 0" />
+            <TextBlock x:Name="Headline" Style="{StaticResource HeaderTextStyle}" FontSize="46.667" Foreground="White" Margin="20, 10, 0, 0" />
 
             <ListView x:Name="Items" Grid.Row="1" Style="{StaticResource PivotListView}" Margin="20, 0, 0, 0"/>
 
@@ -33,9 +39,16 @@
                 </ContentControl.ContentTransitions>
             </ContentControl>
         </Grid>
-        
-        <Grid Grid.Column="1" Width="1000" >
-            <TextBlock Text="Hallo" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" Foreground="Black"/>
+
+        <Grid Grid.Column="1">
+                <GridView x:Name="ResultItems" 
+                          ItemTemplate="{StaticResource ResultHubItems}">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VariableSizedWrapGrid Height="600"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
         </Grid>
     </Grid>
 </Page>

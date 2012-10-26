@@ -18,6 +18,9 @@
         <ResourceDictionary x:Key="Default">
             <x:String x:Key="BackButtonGlyph">&#xE071;</x:String>
             <x:String x:Key="BackButtonSnappedGlyph">&#xE0BA;</x:String>
+            <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="#ABF000"></SolidColorBrush>
+            <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBackgroundThemeBrush" Color="#ABF000"></SolidColorBrush>
+            <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBorderThemeBrush" Color="#ABF000"></SolidColorBrush>
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="HighContrast">

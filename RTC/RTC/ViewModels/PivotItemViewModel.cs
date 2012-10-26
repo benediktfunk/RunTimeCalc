@@ -16,7 +16,7 @@ namespace RTC.ViewModels
             set
             {
                 _title = value;
-                NotifyOfPropertyChange();
+                NotifyOfPropertyChange(() => Title);
             }
         }
     }

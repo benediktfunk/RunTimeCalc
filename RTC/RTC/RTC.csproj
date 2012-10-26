@@ -103,7 +103,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\BindableCollectionExtensions.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="DataSource\DS.cs" />
+    <Compile Include="Models\DistanceViewModel.cs" />
+    <Compile Include="Models\TimeViewModel.cs" />
     <Compile Include="Models\ResultViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\HubViewModel.cs" />

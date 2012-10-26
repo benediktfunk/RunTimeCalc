@@ -54,6 +54,14 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="DistanceListItem">
+        <TextBlock Text="{Binding Value}" Style="{StaticResource ResultHubListItem}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TimeItem">
+        <TextBlock Text="{Binding Title}" Style="{StaticResource ResultHubListItem}" Foreground="Black" FontSize="46.667"/>
+    </DataTemplate>
+
     <Style x:Key="ResultHubListItem" TargetType="TextBlock">
         <Setter Property="FontSize" Value="26.667" />
         <Setter Property="FontWeight" Value="Light"/>

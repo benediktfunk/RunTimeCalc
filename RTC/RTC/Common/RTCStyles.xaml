@@ -8,50 +8,57 @@
     <SolidColorBrush x:Key="RTCGreenBrush" Color="{StaticResource RTCGreen}" />
     
     <DataTemplate x:Key="ResultHubItems">
-        <Grid Background="{StaticResource RTCLilaBrush}" Margin="10" Height="500" Width="300">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="120" />
-            </Grid.RowDefinitions>
-
-            
-            <Grid>
+        <Border BorderBrush="#FF61003F" BorderThickness="1">
+            <Grid Background="{StaticResource RTCLilaBrush}" Height="500" Width="300">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="120" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" Style="{StaticResource ResultHubListItem}" />
-                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Description}" Style="{StaticResource ResultHubListItem}"/>
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Datum" Style="{StaticResource ResultHubListItem}" />
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Date}" Style="{StaticResource ResultHubListItem}" />
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Distanz" Style="{StaticResource ResultHubListItem}" />
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Distance}" Style="{StaticResource ResultHubListItem}" />
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="Zeit" Style="{StaticResource ResultHubListItem}" />
-                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Duration}" Style="{StaticResource ResultHubListItem}" />
+
+                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
+                        <Rectangle Height="30" Width="50" Fill="{StaticResource RTCGreenBrush}" />
+                        <TextBlock Text="{Binding Title}" FontSize="26.667" FontWeight="Light" Foreground="White" Margin="5, 0, 0, 0"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Description}" Style="{StaticResource ResultHubListItem}" FontSize="20.667"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Datum" Style="{StaticResource ResultHubListItem}" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Date}" Style="{StaticResource ResultHubListItem}" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Distanz" Style="{StaticResource ResultHubListItem}" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Distance}" Style="{StaticResource ResultHubListItem}" />
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Zeit" Style="{StaticResource ResultHubListItem}" />
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Duration}" Style="{StaticResource ResultHubListItem}" />
+                </Grid>
+
+                <StackPanel Grid.Column="0" Grid.Row="1" Background="{StaticResource RTCGreenBrush}" Margin="5">
+                    <TextBlock Text="min/km" Style="{StaticResource ResultHubListItem}" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="4:00" Style="{StaticResource ResultHubListItem}"  FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Grid.Row="1" Background="{StaticResource RTCGreenBrush}" Margin="5">
+                    <TextBlock Text="km/h" Style="{StaticResource ResultHubListItem}" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="14.1" Style="{StaticResource ResultHubListItem}"  FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                </StackPanel>
             </Grid>
-
-            <StackPanel Grid.Column="0" Grid.Row="1" Background="{StaticResource RTCGreenBrush}" Margin="5">
-                <TextBlock Text="min/km" Style="{StaticResource ResultHubListItem}" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Text="4:00" Style="{StaticResource ResultHubListItem}"  FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
-            </StackPanel>
-
-            <StackPanel Grid.Column="1" Grid.Row="1" Background="{StaticResource RTCGreenBrush}" Margin="5">
-                <TextBlock Text="km/h" Style="{StaticResource ResultHubListItem}" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Text="14.1" Style="{StaticResource ResultHubListItem}"  FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Grid>
+        </Border>
+       
     </DataTemplate>
 
     <DataTemplate x:Key="DistanceListItem">

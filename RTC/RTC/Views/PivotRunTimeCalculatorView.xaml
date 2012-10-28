@@ -4,34 +4,34 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:CaliburnMicro="using:Caliburn.Micro"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="500"
     d:DesignWidth="600">
     
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75" />
-            <RowDefinition Height="120" />
-            <RowDefinition Height="120" />
+            <RowDefinition Height="130" />
+            <RowDefinition Height="130" />
             <RowDefinition Height="75" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" x:Name="Headline" Text="Berechnen Sie Ihre Laufzeit" Margin="10" Style="{StaticResource SubheaderTextStyle}" FontSize="20.667" Foreground="White" />
         <StackPanel Orientation="Vertical" Grid.Row="1" Margin="5">
             <TextBlock Text="Kilometer | Meter | Zentimeter" Style="{StaticResource SubheaderTextStyle}" Margin="5"/>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Height="65">
                 <ComboBox x:Name="Kilometers" Width="110" ItemTemplate="{StaticResource TimeItem}"/>
                 <ComboBox x:Name="Meters" Width="140"  ItemTemplate="{StaticResource TimeItem}"/>
-                <ComboBox x:Name="Centimeters" Width="110"  ItemTemplate="{StaticResource TimeItem}"/>
+                <ComboBox x:Name="Centimeters" Width="110"  ItemTemplate="{StaticResource TimeItem}" />
             </StackPanel>
         </StackPanel>
 
 
         <StackPanel Orientation="Vertical" Grid.Row="2" Margin="5">
             <TextBlock Text="Stunden | Minuten | Sekunden" Style="{StaticResource SubheaderTextStyle}" Margin="5"/>
-            <StackPanel Orientation="Horizontal" >
-                <ComboBox x:Name="Hours" Width="120" ItemTemplate="{StaticResource TimeItem}"/>
-                <ComboBox x:Name="Minutes" Width="120"  ItemTemplate="{StaticResource TimeItem}"/>
-                <ComboBox x:Name="Seconds" Width="120"  ItemTemplate="{StaticResource TimeItem}"/>
+            <StackPanel Orientation="Horizontal"  Height="65">
+                <ComboBox x:Name="Hours" Width="120" ItemTemplate="{StaticResource TimeItem}" />
+                <ComboBox x:Name="Minutes" Width="120"  ItemTemplate="{StaticResource TimeItem}" />
+                <ComboBox x:Name="Seconds" Width="120"  ItemTemplate="{StaticResource TimeItem}" />
             </StackPanel>
         </StackPanel>
         

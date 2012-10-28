@@ -16,9 +16,9 @@
             <RowDefinition Height="75" />
         </Grid.RowDefinitions>
         
-        <TextBlock Grid.Row="0" x:Name="Headline" Text="Berechnen Sie Ihre Zwischenzeiten" Margin="10" Style="{StaticResource SubheaderTextStyle}" Foreground="White" />
-        <TextBox Grid.Row="1"  x:Name="TimeStamp" Width="300" Height="75" Margin="5" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="0" x:Name="Headline" Text="... folgt später" Margin="10" Style="{StaticResource SubheaderTextStyle}" Foreground="White" />
+        <!--<TextBox Grid.Row="1"  x:Name="TimeStamp" Width="300" Height="75" Margin="5" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="2"  x:Name="Distance" Width="300" Height="75" Margin="5" HorizontalAlignment="Left"/>
-        <Button Grid.Row="3" x:Name="Calculate" Content="Berechnen" FontSize="36.667"/>
+        <Button Grid.Row="3" x:Name="Calculate" Content="Berechnen" FontSize="36.667"/>-->
     </Grid>
 </UserControl>

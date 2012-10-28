@@ -22,17 +22,17 @@ namespace RTC.Common
 
         public static IObservableCollection<DistanceViewModel> CreateKilometers(this IObservableCollection<DistanceViewModel> items)
         {
-            return createPoints(1, 100, 1);
+            return createPoints(0, 100, 1);
         }
 
         public static IObservableCollection<DistanceViewModel> CreateMeters(this IObservableCollection<DistanceViewModel> items)
         {
-            return createPoints(100, 1000, 100);
+            return createPoints(0, 1000, 100);
         }
 
         public static IObservableCollection<DistanceViewModel> CreateCentimeters(this IObservableCollection<DistanceViewModel> items)
         {
-            return createPoints(10, 100, 10);
+            return createPoints(0, 100, 10);
         }
 
         private static IObservableCollection<TimeViewModel> createTicks(int count)

@@ -1,8 +1,10 @@
-﻿namespace RTC.Messages
+﻿using RTC.Models;
+
+namespace RTC.Messages
 {
     public class ResultMessage
     {
-
-        public string Value { get; set; } 
+        public MinutePerKilometer MinutePerKilometer { get; set; }
+        public KilometerPerHour KilometerPerHour { get; set; }
     }
 }

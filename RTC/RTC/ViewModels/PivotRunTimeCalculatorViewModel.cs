@@ -37,12 +37,6 @@ namespace RTC.ViewModels
             SelectedSecond = Seconds.Single(s => s.Title == 0);
         }
 
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-            _eventAggregator.Subscribe(this);
-        }
-
         public async void CalculateRunTime()
         {
             _calculator = new Calculator.Calculator();
@@ -53,8 +47,10 @@ namespace RTC.ViewModels
             var minKm = _calculator.CalculateMinutePerKilometer(kmh);
 
             if (kmh == null || minKm == null) return;
-            _eventAggregator.Publish(new ResultMessage {Value = "Hallo"});
+            
+            // Navigate to result page --- publish result message
             _navigationService.NavigateToViewModel<ResultViewModel>();
+            _eventAggregator.Publish(new ResultMessage {KilometerPerHour = kmh, MinutePerKilometer = minKm});
         }
 
         private string _distance;

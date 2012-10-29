@@ -103,10 +103,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Calculator\Calculator.cs" />
+    <Compile Include="Calculator\ICalculator.cs" />
     <Compile Include="Common\BindableCollectionExtensions.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="DataSource\DS.cs" />
     <Compile Include="Models\DistanceViewModel.cs" />
+    <Compile Include="Models\KilometerPerHour.cs" />
+    <Compile Include="Models\MinutePerKilometer.cs" />
     <Compile Include="Models\TimeViewModel.cs" />
     <Compile Include="Models\ResultViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

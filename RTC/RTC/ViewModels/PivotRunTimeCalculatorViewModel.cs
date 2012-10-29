@@ -1,11 +1,16 @@
+using System;
 using Caliburn.Micro;
+using RTC.Calculator;
 using RTC.Common;
 using RTC.Models;
+using System.Linq;
 
 namespace RTC.ViewModels
 {
     public class PivotRunTimeCalculatorViewModel : PivotItemViewModel
     {
+        private ICalculator _calculator;
+
         public PivotRunTimeCalculatorViewModel(string title) 
             : base(title)
         {
@@ -16,11 +21,23 @@ namespace RTC.ViewModels
             Kilometers = new BindableCollection<DistanceViewModel>().CreateKilometers();
             Meters = new BindableCollection<DistanceViewModel>().CreateMeters();
             Centimeters = new BindableCollection<DistanceViewModel>().CreateCentimeters();
+
+            SelectedKilometer = Kilometers.Single(s => s.Title == 0);
+            SelectedMeter = Meters.Single(s => s.Title == 0);
+            SelectedCentimeter = Centimeters.Single(s => s.Title == 0);
+            SelectedHour = Hours.Single(s => s.Title == 0);
+            SelectedMinute = Minutes.Single(s => s.Title == 0);
+            SelectedSecond = Seconds.Single(s => s.Title == 0);
         }
 
         public async void CalculateRunTime()
         {
-           
+            _calculator = new Calculator.Calculator();
+            var kmh = _calculator.CalculateKilometersPerHour(
+                new Tuple<int, int, int>(SelectedKilometer.Title, SelectedMeter.Title, SelectedCentimeter.Title),
+                new Tuple<int, int, int>(SelectedHour.Title, SelectedMinute.Title, SelectedSecond.Title));
+
+            var minKm = _calculator.CalculateMinutePerKilometer(kmh);
         }
 
         private string _distance;
@@ -97,6 +114,72 @@ namespace RTC.ViewModels
             {
                 _centimeters = value;
                 NotifyOfPropertyChange(() => Centimeters);
+            }
+        }
+
+        private DistanceViewModel _selectedKilometer;
+        public DistanceViewModel SelectedKilometer
+        {
+            get { return _selectedKilometer; }
+            set
+            {
+                _selectedKilometer = value;
+                NotifyOfPropertyChange(() => SelectedKilometer);
+            }
+        }
+
+        private DistanceViewModel _selectedMeter;
+        public DistanceViewModel SelectedMeter
+        {
+            get { return _selectedMeter; }
+            set
+            {
+                _selectedMeter = value;
+                NotifyOfPropertyChange(() => SelectedMeter);
+            }
+        }
+
+        private DistanceViewModel _selectedCentimeter;
+        public DistanceViewModel SelectedCentimeter
+        {
+            get { return _selectedCentimeter; }
+            set
+            {
+                _selectedCentimeter = value;
+                NotifyOfPropertyChange(() => SelectedCentimeter);
+            }
+        }
+
+        private TimeViewModel _selectedHour;
+        public TimeViewModel SelectedHour
+        {
+            get { return _selectedHour; }
+            set
+            {
+                _selectedHour = value;
+                NotifyOfPropertyChange(() => SelectedHour);
+            }
+        }
+
+        private TimeViewModel _selectedMinute;
+        public TimeViewModel SelectedMinute
+        {
+            get { return _selectedMinute; }
+            set
+            {
+                _selectedMinute = value;
+                NotifyOfPropertyChange(() => SelectedMinute);
+            }
+        }
+
+        private TimeViewModel _selectedSecond;
+        public TimeViewModel SelectedSecond
+        {
+            get { return _selectedSecond; }
+            set
+            {
+                _selectedSecond = value;
+                NotifyOfPropertyChange(() => SelectedSecond);
             }
         }
     }

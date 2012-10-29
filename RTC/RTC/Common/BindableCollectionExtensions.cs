@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using RTC.Models;
+using RTC.ViewModels;
 
 namespace RTC.Common
 {

@@ -2,9 +2,10 @@ using Caliburn.Micro;
 
 namespace RTC.ViewModels
 {
-    public class PivotItemViewModel : Screen
+    public class PivotItemViewModel : ViewModelBase
     {
-        public PivotItemViewModel(string title)
+        public PivotItemViewModel(INavigationService navigationService, IEventAggregator eventAggregator, string title) 
+            : base(navigationService, eventAggregator)
         {
             _title = title;
         }

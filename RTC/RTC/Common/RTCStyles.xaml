@@ -68,6 +68,15 @@
     <DataTemplate x:Key="TimeItem">
         <TextBlock Text="{Binding Title}" Style="{StaticResource ResultHubListItem}" Foreground="Black" FontSize="46.667"/>
     </DataTemplate>
+    
+    <Style x:Key="ResultButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource RTCGreenBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource RTCLilaBrush}" />
+        <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="Width" Value="450" />
+        <Setter Property="FontSize" Value="46.667" />
+        <Setter Property="Margin" Value="10" />
+    </Style>
 
     <Style x:Key="ResultHubListItem" TargetType="TextBlock">
         <Setter Property="FontSize" Value="26.667" />

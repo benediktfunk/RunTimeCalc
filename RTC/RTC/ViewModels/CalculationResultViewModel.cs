@@ -1,10 +1,13 @@
-﻿using Caliburn.Micro;
+using Caliburn.Micro;
 
-namespace RTC.Models
+namespace RTC.ViewModels
 {
-    public class ResultViewModel : PropertyChangedBase 
+    public class CalculationResultViewModel : PropertyChangedBase 
     {
-        public ResultViewModel(
+        // serializable
+        public CalculationResultViewModel() { }
+
+        public CalculationResultViewModel(
             string title, 
             string desc, 
             string date, 

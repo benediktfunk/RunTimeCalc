@@ -2,6 +2,7 @@ using System;
 using Caliburn.Micro;
 using RTC.Calculator;
 using RTC.Common;
+using RTC.Messages;
 using RTC.Models;
 using System.Linq;
 
@@ -10,10 +11,16 @@ namespace RTC.ViewModels
     public class PivotRunTimeCalculatorViewModel : PivotItemViewModel
     {
         private ICalculator _calculator;
+        private readonly INavigationService _navigationService;
+        private readonly IEventAggregator _eventAggregator;
 
-        public PivotRunTimeCalculatorViewModel(string title) 
-            : base(title)
+        public PivotRunTimeCalculatorViewModel(INavigationService navigationService, IEventAggregator eventAggregator, string title) 
+            : base(navigationService, eventAggregator, title)
         {
+            _navigationService = navigationService;
+            _eventAggregator = eventAggregator;
+            
+
             Distance = "0.00";
             Hours = new BindableCollection<TimeViewModel>().CreateHours();
             Minutes = new BindableCollection<TimeViewModel>().CreateMinutes();
@@ -22,12 +29,18 @@ namespace RTC.ViewModels
             Meters = new BindableCollection<DistanceViewModel>().CreateMeters();
             Centimeters = new BindableCollection<DistanceViewModel>().CreateCentimeters();
 
-            SelectedKilometer = Kilometers.Single(s => s.Title == 0);
-            SelectedMeter = Meters.Single(s => s.Title == 0);
+            SelectedKilometer = Kilometers.Single(s => s.Title == 12);
+            SelectedMeter = Meters.Single(s => s.Title == 500);
             SelectedCentimeter = Centimeters.Single(s => s.Title == 0);
-            SelectedHour = Hours.Single(s => s.Title == 0);
-            SelectedMinute = Minutes.Single(s => s.Title == 0);
+            SelectedHour = Hours.Single(s => s.Title == 1);
+            SelectedMinute = Minutes.Single(s => s.Title == 8);
             SelectedSecond = Seconds.Single(s => s.Title == 0);
+        }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            _eventAggregator.Subscribe(this);
         }
 
         public async void CalculateRunTime()
@@ -38,6 +51,10 @@ namespace RTC.ViewModels
                 new Tuple<int, int, int>(SelectedHour.Title, SelectedMinute.Title, SelectedSecond.Title));
 
             var minKm = _calculator.CalculateMinutePerKilometer(kmh);
+
+            if (kmh == null || minKm == null) return;
+            _eventAggregator.Publish(new ResultMessage {Value = "Hallo"});
+            _navigationService.NavigateToViewModel<ResultViewModel>();
         }
 
         private string _distance;

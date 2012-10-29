@@ -1,6 +1,6 @@
-﻿using Caliburn.Micro;
+using Caliburn.Micro;
 
-namespace RTC.Models
+namespace RTC.ViewModels
 {
     public class TimeViewModel : PropertyChangedBase 
     {

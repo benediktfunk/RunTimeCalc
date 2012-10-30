@@ -110,7 +110,7 @@
             
             <!-- Button Container -->
             <StackPanel Grid.Column="2" Orientation="Vertical">
-                <Button x:Name="Save" Content="Speichern" Style="{StaticResource ResultButtonStyle}" IsEnabled="False"/>
+                <Button x:Name="Save" Content="Speichern" Style="{StaticResource ResultButtonStyle}"/>
                 <Button x:Name="New" Content="Neu"  Style="{StaticResource ResultButtonStyle}"/>
                 <Button x:Name="Share" Content="Teilen"  Style="{StaticResource ResultButtonStyle}"/>
             </StackPanel>

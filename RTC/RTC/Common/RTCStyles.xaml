@@ -9,7 +9,7 @@
     
     <DataTemplate x:Key="ResultHubItems">
         <Border BorderBrush="#FF61003F" BorderThickness="1">
-            <Grid Background="{StaticResource RTCLilaBrush}" Height="500" Width="300">
+            <Grid Background="{StaticResource RTCLilaBrush}" Height="350" Width="300">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="*" />
@@ -37,8 +37,6 @@
                         <Rectangle Height="30" Width="50" Fill="{StaticResource RTCGreenBrush}" />
                         <TextBlock Text="{Binding Title}" FontSize="26.667" FontWeight="Light" Foreground="White" Margin="5, 0, 0, 0"/>
                     </StackPanel>
-
-                    <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Description}" Style="{StaticResource ResultHubListItem}" FontSize="20.667"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Datum" Style="{StaticResource ResultHubListItem}" />
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Date}" Style="{StaticResource ResultHubListItem}" />
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Distanz" Style="{StaticResource ResultHubListItem}" />
@@ -49,12 +47,12 @@
 
                 <StackPanel Grid.Column="0" Grid.Row="1" Background="{StaticResource RTCGreenBrush}" Margin="5">
                     <TextBlock Text="min/km" Style="{StaticResource ResultHubListItem}" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="4:00" Style="{StaticResource ResultHubListItem}"  FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding MinutePerKilometer}" Style="{StaticResource ResultHubListItem}"  FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Grid.Row="1" Background="{StaticResource RTCGreenBrush}" Margin="5">
                     <TextBlock Text="km/h" Style="{StaticResource ResultHubListItem}" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="14.1" Style="{StaticResource ResultHubListItem}"  FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding KilometerPerHour}" Style="{StaticResource ResultHubListItem}"  FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Grid>
         </Border>

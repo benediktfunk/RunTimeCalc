@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
 using RTC.Messages;
+using RTC.Models;
 using RTC.Storage;
 using Windows.ApplicationModel.DataTransfer;
 
@@ -11,6 +12,8 @@ namespace RTC.ViewModels
     public class ResultItemDetailViewModel : ViewModelBase, IHandle<ResultMessage>, ISupportSharing
     {
         private readonly ObjectStorageHelper<List<ResultViewModel>> _objectStorageHelper;
+        private List<ResultViewModel> _storageResultItems;
+        private ResultViewModel _currentResult;
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
 
@@ -20,7 +23,16 @@ namespace RTC.ViewModels
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
             _objectStorageHelper = new ObjectStorageHelper<List<ResultViewModel>>(StorageType.Local);
+            
+            loadStorageData();
             PageTitle = "Ergebnis";
+        }
+
+
+        private async void loadStorageData()
+        {
+            _storageResultItems = new List<ResultViewModel>();
+            _storageResultItems = await _objectStorageHelper.LoadAsync();
         }
 
         protected override void OnActivate()
@@ -35,13 +47,18 @@ namespace RTC.ViewModels
             _eventAggregator.Unsubscribe(this);
         }
 
-        public void Save()
+        public async void Save()
         {
-            var ds = new DataSource.DS();
-            var items = ds.Initialize();
+            _currentResult = new ResultViewModel(Title, "", DateTime.UtcNow.GetDateTimeFormats()[3], Distance, Time.ToString(), KilometerPerHour, MinutePerKilometer, ResultGroups.Runtime);
 
-            var i = items.ToList();
-            _objectStorageHelper.SaveAsync(i);
+            if(_storageResultItems == null)
+                _storageResultItems = new List<ResultViewModel>();
+
+            _storageResultItems.Add(_currentResult);
+            _storageResultItems.OrderByDescending(s => s.Date);
+            await _objectStorageHelper.SaveAsync(_storageResultItems);
+
+            _navigationService.GoBack();
         }
 
         public async void Handle(ResultMessage message)
@@ -51,6 +68,7 @@ namespace RTC.ViewModels
             Time = message.Date.TimeOfDay;
             KilometerPerHour = message.KilometerPerHour.Value;
             MinutePerKilometer = string.Format("{0}:{1}", message.MinutePerKilometer.Minutes, message.MinutePerKilometer.Seconds);
+            Title = String.Format("Laufen - {0} m", Distance);
         }
 
         private string _pageTitle;
@@ -105,6 +123,28 @@ namespace RTC.ViewModels
             {
                 _minutePerKilometer = value;
                 NotifyOfPropertyChange(() => MinutePerKilometer);
+            }
+        }
+
+        private string _title;
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value;
+                NotifyOfPropertyChange(() => Title);
+            }
+        }
+
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                NotifyOfPropertyChange(() => Description);
             }
         }
 

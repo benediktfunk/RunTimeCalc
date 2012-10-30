@@ -191,11 +191,11 @@ namespace RTC.ViewModels
             Meters = new BindableCollection<DistanceViewModel>().CreateMeters();
             Centimeters = new BindableCollection<DistanceViewModel>().CreateCentimeters();
 
-            SelectedKilometer = Kilometers.Single(s => s.Title == 12);
-            SelectedMeter = Meters.Single(s => s.Title == 500);
+            SelectedKilometer = Kilometers.Single(s => s.Title == 0);
+            SelectedMeter = Meters.Single(s => s.Title == 0);
             SelectedCentimeter = Centimeters.Single(s => s.Title == 0);
-            SelectedHour = Hours.Single(s => s.Title == 1);
-            SelectedMinute = Minutes.Single(s => s.Title == 8);
+            SelectedHour = Hours.Single(s => s.Title == 0);
+            SelectedMinute = Minutes.Single(s => s.Title == 0);
             SelectedSecond = Seconds.Single(s => s.Title == 0);
         }
     }

@@ -35,7 +35,7 @@ namespace RTC.ViewModels
             if (kmh.Value <= 0.0 || minKm.Minutes <= 0) return;
 
             // Navigate to result page --- publish result message
-            _navigationService.NavigateToViewModel<ResultViewModel>();
+            _navigationService.NavigateToViewModel<ResultItemDetailViewModel>();
             _eventAggregator.Publish(new ResultMessage {Distance = distance, Date = date, KilometerPerHour = kmh, MinutePerKilometer = minKm});
         }
 

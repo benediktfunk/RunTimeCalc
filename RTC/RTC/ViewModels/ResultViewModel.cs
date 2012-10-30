@@ -1,71 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Caliburn.Micro;
-using RTC.Messages;
-using RTC.Storage;
-using Windows.ApplicationModel.DataTransfer;
 
 namespace RTC.ViewModels
 {
-    public class ResultViewModel : ViewModelBase, IHandle<ResultMessage>, ISupportSharing
+    public class ResultViewModel : PropertyChangedBase 
     {
-        private readonly ObjectStorageHelper<List<CalculationResultViewModel>> _objectStorageHelper;
-        private readonly INavigationService _navigationService;
-        private readonly IEventAggregator _eventAggregator;
+        // serializable
+        public ResultViewModel() { }
 
-        public ResultViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
-            : base(navigationService, eventAggregator)
+        public ResultViewModel(
+            string title, 
+            string desc, 
+            string date, 
+            decimal distance, 
+            decimal duration)
         {
-            _navigationService = navigationService;
-            _eventAggregator = eventAggregator;
-            _objectStorageHelper = new ObjectStorageHelper<List<CalculationResultViewModel>>(StorageType.Local);
-            PageTitle = "Ergebnis";
+            _title = title;
+            _description= desc;
+            _date = date;
+            _distance = distance;
+            _duration = duration;
         }
 
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-            _eventAggregator.Subscribe(this);
-        }
 
-        protected override void OnDeactivate(bool close)
+        private string _title;
+        public string Title
         {
-            base.OnDeactivate(close);
-            _eventAggregator.Unsubscribe(this);
-        }
-
-        public void Save()
-        {
-            var ds = new DataSource.DS();
-            var items = ds.Initialize();
-
-            var i = items.ToList();
-            _objectStorageHelper.SaveAsync(i);
-        }
-
-        public async void Handle(ResultMessage message)
-        {
-            if (message == null) return;
-            Distance = message.Distance.GetTotalMeters();
-            Time = message.Date.TimeOfDay;
-            KilometerPerHour = message.KilometerPerHour.Value;
-            MinutePerKilometer = string.Format("{0}:{1}", message.MinutePerKilometer.Minutes, message.MinutePerKilometer.Seconds);
-        }
-
-        private string _pageTitle;
-        public string PageTitle
-        {
-            get { return _pageTitle; }
+            get { return _title; }
             set
             {
-                _pageTitle = value;
-                NotifyOfPropertyChange(() => PageTitle);
+                _title = value;
+                NotifyOfPropertyChange(() => Title);
             }
         }
 
-        private double _distance;
-        public double Distance
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                NotifyOfPropertyChange(() => Description);
+            }
+        }
+
+        private string _date;
+        public string Date
+        {
+            get { return _date; }
+            set
+            {
+                _date = value;
+                NotifyOfPropertyChange(() => Date);
+            }
+        }
+
+        private decimal _distance;
+        public decimal Distance
         {
             get { return _distance; }
             set
@@ -75,55 +66,15 @@ namespace RTC.ViewModels
             }
         }
 
-        private TimeSpan _time;
-        public TimeSpan Time
+        private decimal _duration;
+        public decimal Duration
         {
-            get { return _time; }
+            get { return _duration; }
             set
             {
-                _time = value;
-                NotifyOfPropertyChange(() => Time);
+                _duration = value;
+                NotifyOfPropertyChange(() => Duration);
             }
-        }
-
-        private double _kilometerPerHour;
-        public double KilometerPerHour
-        {
-            get { return _kilometerPerHour; }
-            set
-            {
-                _kilometerPerHour = value;
-                NotifyOfPropertyChange(() => KilometerPerHour);
-            }
-        }
-
-        private string _minutePerKilometer;
-        public string MinutePerKilometer
-        {
-            get { return _minutePerKilometer; }
-            set
-            {
-                _minutePerKilometer = value;
-                NotifyOfPropertyChange(() => MinutePerKilometer);
-            }
-        }
-
-        public void OnShareRequested(DataRequest dataRequest)
-        {
-            DataPackage requestData = dataRequest.Data;
-            requestData.Properties.Title = "";
-            requestData.Properties.Description = ""; 
-            requestData.SetText("Hallo");
-        }
-
-        public void Share()
-        {
-            DataTransferManager.ShowShareUI();
-        }
-
-        public void New()
-        {
-            GoBack();
         }
     }
 }

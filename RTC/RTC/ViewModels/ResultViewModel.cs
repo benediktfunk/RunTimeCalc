@@ -120,5 +120,10 @@ namespace RTC.ViewModels
         {
             DataTransferManager.ShowShareUI();
         }
+
+        public void New()
+        {
+            GoBack();
+        }
     }
 }

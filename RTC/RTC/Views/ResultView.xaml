@@ -24,14 +24,15 @@
         </Grid>
 
         <!-- Result View -->
-        <Grid Grid.Row="1" Margin="120,40, 0, 60">
+        <Grid Grid.Row="1" Margin="120,10, 0, 60">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="500" />
+                <ColumnDefinition Width="400" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             
             <!-- Result Container -->
-            <StackPanel Grid.Column="0" Background="{StaticResource RTCLilaBrush}">
+            <StackPanel Grid.Column="0" Background="{StaticResource RTCLilaBrush}" Margin="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="170" />
@@ -63,32 +64,52 @@
                    
                     
                     <!-- Result Information -->
-                    <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- km / h -->
-                        <StackPanel Width="220" Height="220" Background="{StaticResource RTCGreenBrush}">
+                        <StackPanel Width="470" Height="180" Background="{StaticResource RTCGreenBrush}" Margin="5">
                             <TextBlock Text="km/h" Style="{StaticResource ResultHubListItem}" FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock x:Name="KilometerPerHour" Style="{StaticResource ResultHubListItem}"   FontSize="96.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="KilometerPerHour" Style="{StaticResource ResultHubListItem}"   FontSize="106.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
                         </StackPanel>
                         
                         <!-- min / km -->
-                        <StackPanel Width="220" Height="220" Background="{StaticResource RTCGreenBrush}" Margin="10">
+                        <StackPanel Width="470" Height="180" Background="{StaticResource RTCGreenBrush}" Margin="5">
                             <TextBlock Text="min/km" Style="{StaticResource ResultHubListItem}" FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock x:Name="MinutePerKilometer" Style="{StaticResource ResultHubListItem}"   FontSize="96.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="MinutePerKilometer" Style="{StaticResource ResultHubListItem}"   FontSize="106.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>
                     
+                   
+                </Grid>
+            </StackPanel>
+            
+            <!-- Title, Description, Category -->
+            <StackPanel Grid.Column="1" Background="{StaticResource RTCLilaBrush}" Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="170" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
                     <!-- Title Information -->
-                    <TextBlock Grid.Row="3" Grid.Column="0" x:Name="TitleDesc" Text="Title" Style="{StaticResource ResultTextBlockItem}"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="Title" Margin="5, 5, 20, 5" FontSize="26.667"/>
-                    
+                    <TextBlock Grid.Row="0" Grid.Column="0" x:Name="TitleDesc" Text="Title" Style="{StaticResource ResultTextBlockItem}"/>
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="Title" Margin="5, 5, 5, 5" FontSize="26.667" Height="65"/>
+
                     <!-- Description Information -->
-                    <TextBlock Grid.Row="4" Grid.Column="0" x:Name="DescriptionDesc" Text="Notiz" Style="{StaticResource ResultTextBlockItem}"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" x:Name="Description" Margin="5, 5, 20, 5" FontSize="26.667"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" x:Name="DescriptionDesc" Text="Notiz" Style="{StaticResource ResultTextBlockItem}"/>
+                    <TextBox Grid.Row="3" Grid.ColumnSpan="2" x:Name="Description" Margin="5, 5, 5, 5" FontSize="26.667" Height="65"/>
                 </Grid>
             </StackPanel>
             
             <!-- Button Container -->
-            <StackPanel Grid.Column="1" Orientation="Vertical">
+            <StackPanel Grid.Column="2" Orientation="Vertical">
                 <Button x:Name="Save" Content="Speichern" Style="{StaticResource ResultButtonStyle}" IsEnabled="False"/>
                 <Button x:Name="New" Content="Neu"  Style="{StaticResource ResultButtonStyle}"/>
                 <Button x:Name="Share" Content="Teilen"  Style="{StaticResource ResultButtonStyle}"/>

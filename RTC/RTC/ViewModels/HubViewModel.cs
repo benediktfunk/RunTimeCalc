@@ -1,7 +1,7 @@
-﻿using Caliburn.Micro;
-using RTC.DataSource;
-using RTC.Messages;
-using RTC.Models;
+﻿using System.Collections.Generic;
+using Caliburn.Micro;
+using RTC.Storage;
+using Windows.UI.Xaml.Data;
 
 namespace RTC.ViewModels
 {
@@ -9,15 +9,31 @@ namespace RTC.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
+        private ObjectStorageHelper<List<ResultViewModel>> _objectStorageHelper; 
 
         public HubViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
         {
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
-            var ds = new DS();
             Headline = "runTIME calculator";
-            ResultItems = new BindableCollection<CalculationResultViewModel>();
-            ResultItems = ds.Initialize();
+            ResultItems = new BindableCollection<ResultViewModel>();
+            initialize();
+        }
+
+        private async void initialize()
+        {
+
+            _gvItems = new CollectionViewSource {IsSourceGrouped = true};
+
+            _objectStorageHelper = new ObjectStorageHelper<List<ResultViewModel>>(StorageType.Local);
+            var storage = await _objectStorageHelper.LoadAsync();
+            if (storage == null)
+                return;
+
+            foreach (var item in storage)
+                ResultItems.Add(item);
+
+            _gvItems.Source = ResultItems;
         }
 
         protected override void OnActivate()
@@ -53,14 +69,25 @@ namespace RTC.ViewModels
             }
         }
 
-        private IObservableCollection<CalculationResultViewModel> _resultItems;
-        public IObservableCollection<CalculationResultViewModel> ResultItems
+        private IObservableCollection<ResultViewModel> _resultItems;
+        public IObservableCollection<ResultViewModel> ResultItems
         {
             get { return _resultItems; }
             set
             {
                 _resultItems = value;
                 NotifyOfPropertyChange(() => ResultItems);
+            }
+        }
+
+        private CollectionViewSource _gvItems;
+        public CollectionViewSource GvItems
+        {
+            get { return _gvItems; }
+            set
+            {
+                _gvItems = value;
+                NotifyOfPropertyChange(() => GvItems);
             }
         }
     }

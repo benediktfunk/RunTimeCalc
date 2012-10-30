@@ -1,4 +1,6 @@
+using System;
 using Caliburn.Micro;
+using RTC.Models;
 
 namespace RTC.ViewModels
 {
@@ -11,14 +13,38 @@ namespace RTC.ViewModels
             string title, 
             string desc, 
             string date, 
-            decimal distance, 
-            decimal duration)
+            double distance, 
+            string duration,
+            double kmh,
+            string minkm)
         {
             _title = title;
             _description= desc;
             _date = date;
             _distance = distance;
             _duration = duration;
+            _kilometerPerHour = kmh;
+            _minutePerKilometer = minkm;
+        }
+
+        public ResultViewModel(
+            string title,
+            string desc,
+            string date,
+            double distance,
+            string duration,
+            double kmh,
+            string minkm,
+            ResultGroups group)
+        {
+            _title = title;
+            _description = desc;
+            _date = date;
+            _distance = distance;
+            _duration = duration;
+            _kilometerPerHour = kmh;
+            _minutePerKilometer = minkm;
+            _groups = group;
         }
 
 
@@ -55,8 +81,8 @@ namespace RTC.ViewModels
             }
         }
 
-        private decimal _distance;
-        public decimal Distance
+        private double _distance;
+        public double Distance
         {
             get { return _distance; }
             set
@@ -66,14 +92,47 @@ namespace RTC.ViewModels
             }
         }
 
-        private decimal _duration;
-        public decimal Duration
+        private string _duration;
+        public string Duration
         {
             get { return _duration; }
             set
             {
                 _duration = value;
                 NotifyOfPropertyChange(() => Duration);
+            }
+        }
+
+        private double _kilometerPerHour;
+        public double KilometerPerHour
+        {
+            get { return _kilometerPerHour; }
+            set
+            {
+                _kilometerPerHour = value;
+                NotifyOfPropertyChange(() => KilometerPerHour);
+            }
+        }
+
+        private string _minutePerKilometer;
+        public string MinutePerKilometer
+        {
+            get { return _minutePerKilometer; }
+            set
+            {
+                _minutePerKilometer = value;
+                NotifyOfPropertyChange(() => MinutePerKilometer);
+            }
+        }
+
+        private ResultGroups _groups;
+        public ResultGroups Groups
+        {
+            get { return _groups; }
+            set
+            {
+                _groups = value;
+                NotifyOfPropertyChange(() => Groups);
             }
         }
     }

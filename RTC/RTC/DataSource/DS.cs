@@ -1,19 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Caliburn.Micro;
+using RTC.Storage;
 using RTC.ViewModels;
+using System.Linq;
 
 namespace RTC.DataSource
 {
     public class DS
     {
-        public IObservableCollection<ResultViewModel> Initialize()
+        private ObjectStorageHelper<List<ResultViewModel>> _objectStorageHelper;  
+
+        public async Task<BindableCollection<ResultViewModel>> Initialize()
         {
+            _objectStorageHelper = new ObjectStorageHelper<List<ResultViewModel>>(StorageType.Local);
+            var storageList = await _objectStorageHelper.LoadAsync();
+            
+         
             var result = new BindableCollection<ResultViewModel>();
-            for (var i = 0; i < 20; i++)
-            {
-                var item = new ResultViewModel("Laufen " + i, "Laufen war anstrengend " + i, DateTime.UtcNow.GetDateTimeFormats()[3], (decimal)10.0, (decimal)1.05);
+            foreach (var item in storageList)
                 result.Add(item);
-            }
             return result;
         }
     }

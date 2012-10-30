@@ -92,7 +92,7 @@ namespace RTC.Storage
         /// <param name="Handle">User-defined handle for the stored object</param>
         public async Task SaveAsync(T obj)
         {
-            string fileName = ObjectStorageHelper<T>.fileName(obj, String.Empty);
+            var fileName = ObjectStorageHelper<T>.fileName(obj, String.Empty);
             await SaveAsync(obj, fileName);
         }
         /// <summary>

@@ -110,6 +110,7 @@
     <Compile Include="Common\RichTextColumns.cs" />
     <Compile Include="DataSource\DS.cs" />
     <Compile Include="Messages\ResultMessage.cs" />
+    <Compile Include="Models\Distance.cs" />
     <Compile Include="Models\KilometerPerHour.cs" />
     <Compile Include="Models\MinutePerKilometer.cs" />
     <Compile Include="Models\NavigationParameter.cs" />

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
 using RTC.Messages;
-using RTC.Models;
 using RTC.Storage;
-using Windows.UI.Popups;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace RTC.ViewModels
 {
-    public class ResultViewModel : ViewModelBase, IHandle<ResultMessage>
+    public class ResultViewModel : ViewModelBase, IHandle<ResultMessage>, ISupportSharing
     {
         private readonly ObjectStorageHelper<List<CalculationResultViewModel>> _objectStorageHelper;
         private readonly INavigationService _navigationService;
@@ -21,6 +20,7 @@ namespace RTC.ViewModels
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
             _objectStorageHelper = new ObjectStorageHelper<List<CalculationResultViewModel>>(StorageType.Local);
+            PageTitle = "Ergebnis";
         }
 
         protected override void OnActivate()
@@ -47,8 +47,78 @@ namespace RTC.ViewModels
         public async void Handle(ResultMessage message)
         {
             if (message == null) return;
-            var dialog = new MessageDialog(string.Format("{0} KM/H --- {1} min/KM", message.KilometerPerHour.KmH, message.MinutePerKilometer.Kilometers));
-            await dialog.ShowAsync();
+            Distance = message.Distance.GetTotalMeters();
+            Time = message.Date.TimeOfDay;
+            KilometerPerHour = message.KilometerPerHour.Value;
+            MinutePerKilometer = string.Format("{0}:{1}", message.MinutePerKilometer.Minutes, message.MinutePerKilometer.Seconds);
+        }
+
+        private string _pageTitle;
+        public string PageTitle
+        {
+            get { return _pageTitle; }
+            set
+            {
+                _pageTitle = value;
+                NotifyOfPropertyChange(() => PageTitle);
+            }
+        }
+
+        private double _distance;
+        public double Distance
+        {
+            get { return _distance; }
+            set
+            {
+                _distance = value;
+                NotifyOfPropertyChange(() => Distance);
+            }
+        }
+
+        private TimeSpan _time;
+        public TimeSpan Time
+        {
+            get { return _time; }
+            set
+            {
+                _time = value;
+                NotifyOfPropertyChange(() => Time);
+            }
+        }
+
+        private double _kilometerPerHour;
+        public double KilometerPerHour
+        {
+            get { return _kilometerPerHour; }
+            set
+            {
+                _kilometerPerHour = value;
+                NotifyOfPropertyChange(() => KilometerPerHour);
+            }
+        }
+
+        private string _minutePerKilometer;
+        public string MinutePerKilometer
+        {
+            get { return _minutePerKilometer; }
+            set
+            {
+                _minutePerKilometer = value;
+                NotifyOfPropertyChange(() => MinutePerKilometer);
+            }
+        }
+
+        public void OnShareRequested(DataRequest dataRequest)
+        {
+            DataPackage requestData = dataRequest.Data;
+            requestData.Properties.Title = "";
+            requestData.Properties.Description = ""; 
+            requestData.SetText("Hallo");
+        }
+
+        public void Share()
+        {
+            DataTransferManager.ShowShareUI();
         }
     }
 }

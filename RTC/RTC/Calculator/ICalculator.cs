@@ -5,7 +5,7 @@ namespace RTC.Calculator
 {
     public interface ICalculator
     {
-        KilometerPerHour CalculateKilometersPerHour(Tuple<int, int, int> distance, Tuple<int, int, int> time);
+        KilometerPerHour CalculateKilometersPerHour(Distance distance, DateTime time);
         MinutePerKilometer CalculateMinutePerKilometer(KilometerPerHour kmh);
     }
 }

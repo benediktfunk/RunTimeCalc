@@ -3,8 +3,8 @@ using Caliburn.Micro;
 using RTC.Calculator;
 using RTC.Common;
 using RTC.Messages;
-using RTC.Models;
 using System.Linq;
+using RTC.Models;
 
 namespace RTC.ViewModels
 {
@@ -19,38 +19,24 @@ namespace RTC.ViewModels
         {
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
-            
-
-            Distance = "0.00";
-            Hours = new BindableCollection<TimeViewModel>().CreateHours();
-            Minutes = new BindableCollection<TimeViewModel>().CreateMinutes();
-            Seconds = new BindableCollection<TimeViewModel>().CreateSeconds();
-            Kilometers = new BindableCollection<DistanceViewModel>().CreateKilometers();
-            Meters = new BindableCollection<DistanceViewModel>().CreateMeters();
-            Centimeters = new BindableCollection<DistanceViewModel>().CreateCentimeters();
-
-            SelectedKilometer = Kilometers.Single(s => s.Title == 12);
-            SelectedMeter = Meters.Single(s => s.Title == 500);
-            SelectedCentimeter = Centimeters.Single(s => s.Title == 0);
-            SelectedHour = Hours.Single(s => s.Title == 1);
-            SelectedMinute = Minutes.Single(s => s.Title == 8);
-            SelectedSecond = Seconds.Single(s => s.Title == 0);
+            initializePivotRunTimeCalculatorViewModel();
         }
 
-        public async void CalculateRunTime()
+        public void CalculateRunTime()
         {
             _calculator = new Calculator.Calculator();
-            var kmh = _calculator.CalculateKilometersPerHour(
-                new Tuple<int, int, int>(SelectedKilometer.Title, SelectedMeter.Title, SelectedCentimeter.Title),
-                new Tuple<int, int, int>(SelectedHour.Title, SelectedMinute.Title, SelectedSecond.Title));
 
-            var minKm = _calculator.CalculateMinutePerKilometer(kmh);
-
-            if (kmh == null || minKm == null) return;
+            var distance = new Distance(SelectedKilometer.Title, SelectedMeter.Title, SelectedCentimeter.Title);
+            var date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, SelectedHour.Title,
+                                    SelectedMinute.Title, SelectedSecond.Title);
             
+            var kmh = _calculator.CalculateKilometersPerHour(distance, date);
+            var minKm = _calculator.CalculateMinutePerKilometer(kmh);
+            if (kmh.Value <= 0.0 || minKm.Minutes <= 0) return;
+
             // Navigate to result page --- publish result message
             _navigationService.NavigateToViewModel<ResultViewModel>();
-            _eventAggregator.Publish(new ResultMessage {KilometerPerHour = kmh, MinutePerKilometer = minKm});
+            _eventAggregator.Publish(new ResultMessage {Distance = distance, Date = date, KilometerPerHour = kmh, MinutePerKilometer = minKm});
         }
 
         private string _distance;
@@ -194,6 +180,23 @@ namespace RTC.ViewModels
                 _selectedSecond = value;
                 NotifyOfPropertyChange(() => SelectedSecond);
             }
+        }
+
+        private void initializePivotRunTimeCalculatorViewModel()
+        {
+            Hours = new BindableCollection<TimeViewModel>().CreateHours();
+            Minutes = new BindableCollection<TimeViewModel>().CreateMinutes();
+            Seconds = new BindableCollection<TimeViewModel>().CreateSeconds();
+            Kilometers = new BindableCollection<DistanceViewModel>().CreateKilometers();
+            Meters = new BindableCollection<DistanceViewModel>().CreateMeters();
+            Centimeters = new BindableCollection<DistanceViewModel>().CreateCentimeters();
+
+            SelectedKilometer = Kilometers.Single(s => s.Title == 12);
+            SelectedMeter = Meters.Single(s => s.Title == 500);
+            SelectedCentimeter = Centimeters.Single(s => s.Title == 0);
+            SelectedHour = Hours.Single(s => s.Title == 1);
+            SelectedMinute = Minutes.Single(s => s.Title == 8);
+            SelectedSecond = Seconds.Single(s => s.Title == 0);
         }
     }
 }

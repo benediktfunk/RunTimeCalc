@@ -26,7 +26,6 @@ namespace RTC.ViewModels
 
             Items.Add(new PivotRunTimeCalculatorViewModel(_navigationService, _eventAggregator, "Laufzeit"));
             Items.Add(new PivotInterimsCalculatorViewModel(_navigationService, _eventAggregator, "Zwischenzeit"));
-
             ActivateItem(Items[0]);
         }
 

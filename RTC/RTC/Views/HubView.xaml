@@ -5,49 +5,93 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d">
 
-    <Grid>
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition  Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
-        	<Grid.Background>
-        		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-        			<GradientStop Color="#FF61003F"/>
-        			<GradientStop Color="{StaticResource RTCLila}" Offset="1"/>
-        		</LinearGradientBrush>
-        	</Grid.Background>
-            <Grid.RowDefinitions>
-                <!-- Logo -->
-                <RowDefinition Height="60" />
-                <!-- List with opinions -->
-                <RowDefinition Height="60" />
-                <!-- Content Controls -->
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
 
-            <TextBlock x:Name="Headline" Style="{StaticResource HeaderTextStyle}" FontSize="46.667" Foreground="White" Margin="20, 10, 0, 0" />
-            <ListView x:Name="Items" Grid.Row="1" Style="{StaticResource PivotListView}" Margin="20, 0, 0, 0"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF61003F"/>
+                    <GradientStop Color="{StaticResource RTCLila}" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
 
-            <ContentControl x:Name="ActiveItem" Grid.Row="2" Margin="20, 10, 0, 0">
-                <ContentControl.ContentTransitions>
-                    <TransitionCollection>
-                        <ContentThemeTransition />
-                    </TransitionCollection>
-                </ContentControl.ContentTransitions>
-            </ContentControl>
+            <!--Back Button -->
+            <Button Grid.Column="0" x:Name="GoBack" Style="{StaticResource BackButtonStyle}"  Visibility="Collapsed"/>
+            <TextBlock Grid.Column="1" x:Name="Headline" Style="{StaticResource PageHeaderTextStyle}" />
         </Grid>
 
-        <Grid Grid.Column="1">
-                <GridView x:Name="ResultItems" 
+        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource HorizontalScrollViewerStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="120, 20, 0, 60">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="55" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Rechner >" Style="{StaticResource HeaderTextStyle}" FontSize="26.667" FontWeight="Light" />
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <!-- List with opinions -->
+                            <RowDefinition Height="60" />
+                            <!-- Content Controls -->
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <ListView x:Name="Items" Grid.Row="0" Style="{StaticResource PivotListView}" />
+                        <ContentControl x:Name="ActiveItem" Grid.Row="1">
+                            <ContentControl.ContentTransitions>
+                                <TransitionCollection>
+                                    <ContentThemeTransition />
+                                </TransitionCollection>
+                            </ContentControl.ContentTransitions>
+                        </ContentControl>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="120, 20, 0, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="55" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Ergebnisse >" Style="{StaticResource HeaderTextStyle}" FontSize="26.667" FontWeight="Light" />
+
+                    <GridView Grid.Row="1" x:Name="ResultItems" 
                           ItemTemplate="{StaticResource ResultHubItems}">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VariableSizedWrapGrid Height="600"/>
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                </GridView>
-        </Grid>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VariableSizedWrapGrid />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </Grid>
+
+            </Grid>
+        </ScrollViewer>
+
+
+       
+
+       
     </Grid>
 </Page>

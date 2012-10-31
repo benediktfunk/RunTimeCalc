@@ -22,9 +22,6 @@ namespace RTC.ViewModels
 
         private async void initialize()
         {
-
-            _gvItems = new CollectionViewSource {IsSourceGrouped = true};
-
             _objectStorageHelper = new ObjectStorageHelper<List<ResultViewModel>>(StorageType.Local);
             var storage = await _objectStorageHelper.LoadAsync();
             if (storage == null)
@@ -32,8 +29,6 @@ namespace RTC.ViewModels
 
             foreach (var item in storage)
                 ResultItems.Add(item);
-
-            _gvItems.Source = ResultItems;
         }
 
         protected override void OnActivate()
@@ -77,17 +72,6 @@ namespace RTC.ViewModels
             {
                 _resultItems = value;
                 NotifyOfPropertyChange(() => ResultItems);
-            }
-        }
-
-        private CollectionViewSource _gvItems;
-        public CollectionViewSource GvItems
-        {
-            get { return _gvItems; }
-            set
-            {
-                _gvItems = value;
-                NotifyOfPropertyChange(() => GvItems);
             }
         }
     }

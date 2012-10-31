@@ -9,7 +9,7 @@
     
     <DataTemplate x:Key="ResultHubItems">
         <Border BorderBrush="#FF61003F" BorderThickness="1">
-            <Grid Background="{StaticResource RTCLilaBrush}" Height="350" Width="300">
+            <Grid Background="{StaticResource RTCLilaBrush}" Height="250" Width="300">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="*" />
@@ -19,10 +19,9 @@
                     <RowDefinition Height="120" />
                 </Grid.RowDefinitions>
 
-
                 <Grid Grid.Row="0" Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -37,8 +36,6 @@
                         <Rectangle Height="30" Width="50" Fill="{StaticResource RTCGreenBrush}" />
                         <TextBlock Text="{Binding Title}" FontSize="26.667" FontWeight="Light" Foreground="White" Margin="5, 0, 0, 0"/>
                     </StackPanel>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Datum" Style="{StaticResource ResultHubListItem}" />
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Date}" Style="{StaticResource ResultHubListItem}" />
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Distanz" Style="{StaticResource ResultHubListItem}" />
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Distance}" Style="{StaticResource ResultHubListItem}" />
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Zeit" Style="{StaticResource ResultHubListItem}" />
@@ -46,13 +43,13 @@
                 </Grid>
 
                 <StackPanel Grid.Column="0" Grid.Row="1" Background="{StaticResource RTCGreenBrush}" Margin="5">
-                    <TextBlock Text="min/km" Style="{StaticResource ResultHubListItem}" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="{Binding MinutePerKilometer}" Style="{StaticResource ResultHubListItem}"  FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="min/km" Style="{StaticResource ResultHubListItem}" FontSize="26.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding MinutePerKilometer}" FontSize="46.667" FontWeight="Light" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Grid.Row="1" Background="{StaticResource RTCGreenBrush}" Margin="5">
-                    <TextBlock Text="km/h" Style="{StaticResource ResultHubListItem}" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="{Binding KilometerPerHour}" Style="{StaticResource ResultHubListItem}"  FontSize="46.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="km/h" Style="{StaticResource ResultHubListItem}" FontSize="26.667" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding KilometerPerHour}" FontSize="46.667" FontWeight="Light" Foreground="{StaticResource RTCLilaBrush}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -77,10 +74,9 @@
     </Style>
 
     <Style x:Key="ResultHubListItem" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="26.667" />
+        <Setter Property="FontSize" Value="28.667" />
         <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="LineHeight" Value="30"/>
-        <Setter Property="Margin" Value="2" />
+        <Setter Property="Margin" Value="5" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="RenderTransform">

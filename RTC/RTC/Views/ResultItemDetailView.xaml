@@ -18,28 +18,57 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF61003F"/>
-                    <GradientStop Color="{StaticResource RTCLila}" Offset="1"/>
-                </LinearGradientBrush>
-            </Grid.Background>
+            <Grid Grid.Column="0">
+                <Path Data="M320.419,240.314 L639.791,240.838 L720.419,320.419 L320.419,320.942 z" 
+                      Fill="{StaticResource RTCGreenBrush}" 
+                      HorizontalAlignment="Left" 
+                      Height="81.628"  
+                      Stretch="Fill" 
+                      Stroke="{StaticResource RTCGreenBrush}" 
+                      StrokeThickness="2"
+                      UseLayoutRounding="False" 
+                      VerticalAlignment="Top" 
+                      Width="401"
+                      Margin="-5, 40, 0, 0"/>
+                <Button x:Name="GoBack" Style="{StaticResource BackButtonStyle}" />
+            </Grid>
 
             <!--Back Button -->
-            <Button Grid.Column="0" x:Name="GoBack" Style="{StaticResource BackButtonStyle}" />
-            <TextBlock Grid.Column="1" x:Name="PageTitle" Style="{StaticResource PageHeaderTextStyle}"/>
+            <Grid Grid.Column="1">
+                <Path Data="M320.419,240.314 L639.791,240.838 L720.419,320.419 L320.419,320.942 z" 
+                      Fill="{StaticResource RTCGreenBrush}" 
+                      HorizontalAlignment="Left" 
+                      Height="81.628"  
+                      Stretch="Fill" 
+                      Stroke="{StaticResource RTCGreenBrush}" 
+                      StrokeThickness="2"
+                      UseLayoutRounding="False" 
+                      VerticalAlignment="Top" 
+                      Width="401"
+                      Margin="-5, 40, 0, 0"/>
+                <TextBlock Text="Result" Style="{StaticResource PageHeaderTextStyle}"/>
+            </Grid>
+            
         </Grid>
 
         <!-- Result View -->
         <Grid Grid.Row="1" Margin="120,40, 0, 80">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="500" />
-                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             
+            <!--Vertical Headline -->
+            <TextBlock Grid.Column="0" Text="ERGEBNIS" Style="{StaticResource HeaderTextStyle}" FontSize="66.667" FontWeight="Light" >
+                <TextBlock.RenderTransform>
+                    <RotateTransform Angle="90" />
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
             <!-- Result Container -->
-            <StackPanel Grid.Column="0" Background="{StaticResource RTCLilaBrush}" Margin="5">
+            <StackPanel Grid.Column="1" Background="{StaticResource RTCLilaBrush}" Margin="-250, 5, 5, 5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="170" />
@@ -90,7 +119,7 @@
             </StackPanel>
             
             <!-- Title, Description, Category -->
-            <StackPanel Grid.Column="1" Background="{StaticResource RTCLilaBrush}" Margin="5">
+            <StackPanel Grid.Column="2" Background="{StaticResource RTCLilaBrush}" Margin="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="170" />
@@ -107,7 +136,7 @@
 
                     <!-- Title Information -->
                     <TextBlock Grid.Row="0" Grid.Column="0" x:Name="TitleDesc" Text="Title" Style="{StaticResource ResultTextBlockItem}"/>
-                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="Title" Margin="5, 5, 5, 5" FontSize="26.667" Height="65"/>
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="Title" Margin="5, 5, 5, 5" FontSize="26.667" Height="65" Width="300"/>
 
                     <!-- Description Information 
                     <TextBlock Grid.Row="2" Grid.Column="0" x:Name="DescriptionDesc" Text="Notiz" Style="{StaticResource ResultTextBlockItem}"/>
@@ -117,7 +146,7 @@
             </StackPanel>
             
             <!-- Button Container -->
-            <StackPanel Grid.Column="2" Orientation="Vertical">
+            <StackPanel Grid.Column="3" Orientation="Vertical">
                 <Button x:Name="Save" Content="Speichern" Style="{StaticResource ResultButtonStyle}"/>
                 <Button x:Name="New" Content="Neu"  Style="{StaticResource ResultButtonStyle}"/>
                 <Button x:Name="Share" Content="Teilen"  Style="{StaticResource ResultButtonStyle}"/>

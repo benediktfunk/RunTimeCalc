@@ -22,16 +22,20 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF61003F"/>
-                    <GradientStop Color="{StaticResource RTCLila}" Offset="1"/>
-                </LinearGradientBrush>
-            </Grid.Background>
-
-            <!--Back Button -->
-            <Button Grid.Column="0" x:Name="GoBack" Style="{StaticResource BackButtonStyle}"  Visibility="Collapsed"/>
-            <TextBlock Grid.Column="1" x:Name="Headline" Style="{StaticResource PageHeaderTextStyle}" />
+            <Grid Grid.ColumnSpan="2">
+                <Path Data="M320.419,240.314 L639.791,240.838 L720.419,320.419 L320.419,320.942 z" 
+                      Fill="{StaticResource RTCGreenBrush}" 
+                      HorizontalAlignment="Left" 
+                      Height="81.628"  
+                      Stretch="Fill" 
+                      Stroke="{StaticResource RTCGreenBrush}" 
+                      StrokeThickness="2"
+                      UseLayoutRounding="False" 
+                      VerticalAlignment="Top" 
+                      Width="401"
+                      Margin="-5, 40, 0, 0"/>
+                <TextBlock Text="runtime" Style="{StaticResource HeaderTextStyle}" Margin="150, 55, 0, 0"/>
+            </Grid>
         </Grid>
 
         <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource HorizontalScrollViewerStyle}">
@@ -42,20 +46,25 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0" Margin="120, 20, 0, 60">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="55" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Rechner >" Style="{StaticResource HeaderTextStyle}" FontSize="26.667" FontWeight="Light" />
+                    <TextBlock Grid.Column="0" Text="RECHNER" Style="{StaticResource HeaderTextStyle}" FontSize="66.667" FontWeight="Light" >
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="90" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
 
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Column="1" Margin="-230, 0,0,0">
                         <Grid.RowDefinitions>
                             <!-- List with opinions -->
                             <RowDefinition Height="60" />
                             <!-- Content Controls -->
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
+                        
 
                         <ListView x:Name="Items" Grid.Row="0" Style="{StaticResource PivotListView}" />
                         <ContentControl x:Name="ActiveItem" Grid.Row="1">
@@ -69,15 +78,20 @@
                 </Grid>
 
                 <Grid Grid.Column="1" Margin="120, 20, 0, 0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="55" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Ergebnisse >" Style="{StaticResource HeaderTextStyle}" FontSize="26.667" FontWeight="Light" />
+                    <TextBlock Grid.Column="0"  Text="ERGEBNISSE" Style="{StaticResource HeaderTextStyle}" FontSize="66.667" FontWeight="Light" Margin="0,0,0,562.687" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="90" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
 
-                    <GridView Grid.Row="1" x:Name="ResultItems" 
-                          ItemTemplate="{StaticResource ResultHubItems}">
+                    <GridView Grid.Column="1" x:Name="ResultItems" 
+                          ItemTemplate="{StaticResource ResultHubItems}"
+                              Margin="-300, 0, 0, 0">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VariableSizedWrapGrid />

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Caliburn.Micro;
 using RTC.Storage;
-using Windows.UI.Xaml.Data;
 
 namespace RTC.ViewModels
 {
@@ -15,7 +14,6 @@ namespace RTC.ViewModels
         {
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
-            Headline = "runTIME calculator";
             ResultItems = new BindableCollection<ResultViewModel>();
             initialize();
         }
@@ -34,34 +32,9 @@ namespace RTC.ViewModels
         protected override void OnActivate()
         {
             base.OnActivate();
-
             Items.Add(new PivotRunTimeCalculatorViewModel(_navigationService, _eventAggregator, "Laufzeit"));
             Items.Add(new PivotInterimsCalculatorViewModel(_navigationService, _eventAggregator, "Zwischenzeit"));
             ActivateItem(Items[0]);
-        }
-
-        
-
-        private string _headline;
-        public string Headline
-        {
-            get { return _headline; }
-            set
-            {
-                _headline = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        private string _helloText;
-        public string HelloText
-        {
-            get { return _helloText; }
-            set 
-            { 
-                _helloText = value;
-                NotifyOfPropertyChange();
-            }
         }
 
         private IObservableCollection<ResultViewModel> _resultItems;

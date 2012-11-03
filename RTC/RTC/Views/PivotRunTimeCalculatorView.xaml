@@ -14,23 +14,17 @@
             <RowDefinition Height="75" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical" Grid.Row="0" >
-            <TextBlock Text="[Kilometer-Meter-Zentimeter]" Style="{StaticResource SubheaderTextStyle}" FontSize="16.667" Margin="0,0,10,5" HorizontalAlignment="Right"/>
-            <StackPanel Orientation="Horizontal" Height="95">
-                <ComboBox x:Name="Kilometers" Width="95" ItemTemplate="{StaticResource TimeItem}" Margin="2"/>
-                <ComboBox x:Name="Meters" Width="115"  ItemTemplate="{StaticResource TimeItem}" Margin="2"/>
-                <ComboBox x:Name="Centimeters" Width="95"  ItemTemplate="{StaticResource TimeItem}" Margin="2"/>
-            </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" >
+                <ComboBox x:Name="Kilometers"  Margin="2"  ItemTemplate="{StaticResource TimeItem}" Style="{StaticResource DistanceKilometerTimeComboBoxStyle}" />
+                <ComboBox x:Name="Meters" ItemTemplate="{StaticResource TimeItem}" Margin="2" Style="{StaticResource DistanceMeterTimeComboBoxStyle}" />
+                <ComboBox x:Name="Centimeters" ItemTemplate="{StaticResource TimeItem}" Margin="2" Style="{StaticResource DistanceZentimeterTimeComboBoxStyle}"/>
         </StackPanel>
 
 
-        <StackPanel Orientation="Vertical" Grid.Row="1">
-            <TextBlock Text="[Stunden-Minuten-Sekunden]" Style="{StaticResource SubheaderTextStyle}" FontSize="16.667"  Margin="0,0,10,5" HorizontalAlignment="Right"/>
-            <StackPanel Orientation="Horizontal"  Height="95">
-                <ComboBox x:Name="Hours" Width="95" ItemTemplate="{StaticResource TimeItem}"  Margin="2"/>
-                <ComboBox x:Name="Minutes" Width="115"  ItemTemplate="{StaticResource TimeItem}"  Margin="2"/>
-                <ComboBox x:Name="Seconds" Width="95"  ItemTemplate="{StaticResource TimeItem}"  Margin="2"/>
-            </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <ComboBox x:Name="Hours" ItemTemplate="{StaticResource TimeItem}"  Margin="2" Style="{StaticResource TimeStundenTimeComboBoxStyle}"/>
+            <ComboBox x:Name="Minutes" ItemTemplate="{StaticResource TimeItem}"  Margin="2" Style="{StaticResource TimeMinutenTimeComboBoxStyle}"/>
+            <ComboBox x:Name="Seconds" ItemTemplate="{StaticResource TimeItem}"  Margin="2" Style="{StaticResource TimeSekundenTimeComboBoxStyle}"/>
         </StackPanel>
         
         <Button Grid.Row="2" x:Name="Calculate" Content="Berechnen" FontSize="36.667" CaliburnMicro:Message.Attach="[Event Click] = [Action CalculateRunTime()]"/>

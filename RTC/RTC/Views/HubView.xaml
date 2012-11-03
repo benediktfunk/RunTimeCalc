@@ -66,7 +66,7 @@
                         </Grid.RowDefinitions>
                         
 
-                        <ListView x:Name="Items" Grid.Row="0" Style="{StaticResource PivotListView}" />
+                        <ListView x:Name="Items" Grid.Row="0" Style="{StaticResource PivotListView}" FontSize="36.667" />
                         <ContentControl x:Name="ActiveItem" Grid.Row="1">
                             <ContentControl.ContentTransitions>
                                 <TransitionCollection>

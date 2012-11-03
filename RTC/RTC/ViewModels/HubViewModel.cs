@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Caliburn.Micro;
 using RTC.Storage;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace RTC.ViewModels
 {
-    public class HubViewModel : Conductor<PivotItemViewModel>.Collection.OneActive
+    public class HubViewModel : Conductor<PivotItemViewModel>.Collection.OneActive, ISupportSharing
     {
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
@@ -46,6 +48,14 @@ namespace RTC.ViewModels
                 _resultItems = value;
                 NotifyOfPropertyChange(() => ResultItems);
             }
+        }
+
+        public void OnShareRequested(DataRequest dataRequest)
+        {
+            var d = dataRequest.Data;
+            d.Properties.Title = "Selected Item";
+            d.Properties.Description = "is an selected item description";
+            d.SetUri(new Uri("http://www.benedikt-funk.de"));
         }
     }
 }

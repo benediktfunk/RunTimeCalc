@@ -52,7 +52,7 @@
         </Grid>
 
         <!-- Result View -->
-        <Grid Grid.Row="1" Margin="120,40, 0, 80">
+        <Grid Grid.Row="1" Margin="120,40, 0, 40">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
